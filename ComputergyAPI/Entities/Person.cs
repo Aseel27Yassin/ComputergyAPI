@@ -20,6 +20,8 @@
 
         public string? ProfileImage { get; set; }
 
-         
+        public DateTime? LastLoginTime { get; set; }
+
+        public bool IsLoggedIn { get; set; } = false;
     }
 }

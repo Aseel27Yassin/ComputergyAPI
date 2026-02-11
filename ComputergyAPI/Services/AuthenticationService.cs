@@ -25,18 +25,34 @@ namespace ComputergyAPI.Services
 
         public async Task<string> SignIn(SignInInputDTO input)
         {
-            var user = _computergyDbContext.Persons.Where(u => u.Email == input.Email && u.Password == input.Password).SingleOrDefault();
+            var user = _computergyDbContext.Persons.Where(u => u.Email == input.Email && u.Password == input.Password && u.IsLoggedIn == false).SingleOrDefault();
             if(user == null)
             {
                 return "User not foudnd";
             }
+            user.LastLoginTime = DateTime.Now;
+            user.IsLoggedIn = true;
+            _computergyDbContext.Update(user);
+            _computergyDbContext.SaveChanges();
 
             return "Login success, Token!";
         }
 
-        public Task<bool> SignOut(int userId)
+
+        public async Task<bool> SignOut(int userId)
         {
-            throw new NotImplementedException();
+            var user = _computergyDbContext.Persons.Where(u => u.Id == userId && u.IsLoggedIn == true).SingleOrDefault();
+            if (user == null)
+            {
+                return false;
+            }
+            user.LastLoginTime = DateTime.Now;
+            user.IsLoggedIn = false;
+
+            _computergyDbContext.Update(user);
+            _computergyDbContext.SaveChanges();
+
+            return true;
         }
 
         public async Task<string> SignUp(SignUpInputDTO input)
