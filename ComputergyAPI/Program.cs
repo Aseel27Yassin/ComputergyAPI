@@ -1,3 +1,6 @@
+using ComputergyAPI.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ComputergyDbContext>(option =>
+option.UseSqlServer("Data Source=DESKTOP-UI392E3;Initial Catalog=ComputergyDb;Integrated Security=True;Encrypt=True;Trust Server Certificate=True"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
