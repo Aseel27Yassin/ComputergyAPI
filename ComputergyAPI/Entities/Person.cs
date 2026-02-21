@@ -24,6 +24,12 @@
 
         public string UserType { get; set; } = "Client";
 
+        public string? OTP { get; set; }
+
+        public DateTime? ExpirationOTP { get; set; }
+
+        public bool IsVerified { get; set; } = false;
+
         public bool IsLoggedIn { get; set; } = false;
     }
 }
