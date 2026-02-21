@@ -9,6 +9,8 @@ namespace ComputergyAPI.Interfaces
 
         Task<string> SignIn(SignInInputDTO input);
 
+        Task<string> Verification(VerificationInputDTO input);
+
         Task<bool> SendOTP(string email);
 
         Task<bool> ResetPersonPassword(ResetPersonPasswordInputDTO input);
@@ -16,3 +18,4 @@ namespace ComputergyAPI.Interfaces
         Task<bool> SignOut(int userId);
     }
 }
+ 
